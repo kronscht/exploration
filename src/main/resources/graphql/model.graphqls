@@ -1,0 +1,45 @@
+type AppUser {
+    id: ID
+    name: String
+    surname: String
+    todos: [Todo]
+}
+
+input AppUserInput {
+    name: String
+    surname: String
+    todos: [TodoInput]
+}
+
+type Todo {
+    id: ID
+    description: String
+    done: Boolean
+    appUser: AppUser
+}
+
+input TodoInput {
+    description: String
+    done: Boolean
+    appUser: AppUserInput
+}
+
+input UpdateTodoInput {
+    id: ID!
+    description: String
+    done: Boolean
+}
+
+type Query {
+    appUsers: [AppUser]
+}
+
+type Mutation {
+    writeAppUser(input: AppUserInput): AppUser
+    updateTodo(input: UpdateTodoInput): Todo
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
