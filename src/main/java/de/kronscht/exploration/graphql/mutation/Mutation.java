@@ -2,43 +2,45 @@ package de.kronscht.exploration.graphql.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import de.kronscht.exploration.model.AppUser;
-import de.kronscht.exploration.model.Todo;
+import de.kronscht.exploration.model.Task;
 import de.kronscht.exploration.model.input.AppUserInput;
-import de.kronscht.exploration.model.input.TodoInput;
-import de.kronscht.exploration.model.input.UpdateTodoInput;
+import de.kronscht.exploration.model.input.SaveTaskInput;
+import de.kronscht.exploration.model.input.TaskInput;
+import de.kronscht.exploration.model.input.UpdateTaskInput;
 import de.kronscht.exploration.repository.AppUserRepository;
-import de.kronscht.exploration.repository.TodoRepository;
+import de.kronscht.exploration.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.stream.Collectors;
 
 @Component
 public class Mutation implements GraphQLMutationResolver {
 
     private AppUserRepository appUserRepository;
 
-    private TodoRepository todoRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
-    public Mutation(AppUserRepository appUserRepository, TodoRepository todoRepository) {
+    public Mutation(AppUserRepository appUserRepository, TaskRepository taskRepository) {
         this.appUserRepository = appUserRepository;
-        this.todoRepository = todoRepository;
+        this.taskRepository = taskRepository;
     }
 
     public AppUser writeAppUser(AppUserInput appUserInput) {
         return appUserRepository.save(mapToAppUser(appUserInput));
     }
 
-    //region Todo
+    //region Task
+
+
 
     @Transactional
-    public Todo updateTodo(UpdateTodoInput input) throws Exception {
-        Todo todo = todoRepository.findById(input.getId()).orElseThrow(Exception::new);
-        todo.setDescription(input.getDescription());
-        todo.setDone(input.isDone());
-        return todo;
+    public Task updateTask(UpdateTaskInput input) throws Exception {
+        Task task = taskRepository.findById(input.getId()).orElseThrow(Exception::new);
+        task.setDescription(input.getDescription());
+        task.setDone(input.isDone());
+        return task;
     }
 
     //endregion
@@ -49,16 +51,11 @@ public class Mutation implements GraphQLMutationResolver {
         AppUser appUser = new AppUser();
         appUser.setName(input.getName());
         appUser.setSurname(input.getSurname());
-        appUser.addToTodos(input.getTodos().stream().map(this::mapToTodo).collect(Collectors.toList()));
+        //appUser.addToTodos(input.getTodos().stream().map(this::mapToTodo).collect(Collectors.toList()));
         return appUser;
     }
 
-    private Todo mapToTodo(TodoInput input) {
-        Todo todo = new Todo();
-        todo.setDescription(input.getDescription());
-        todo.setDone(input.isDone());
-        return todo;
-    }
+
 
 
     //endregion

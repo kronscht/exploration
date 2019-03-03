@@ -1,42 +1,51 @@
+# model.AppUser
 type AppUser {
     id: ID
     name: String
     surname: String
-    todos: [Todo]
 }
 
 input AppUserInput {
     name: String
     surname: String
-    todos: [TodoInput]
 }
 
-type Todo {
+# model.Task
+type Task {
     id: ID
     description: String
     done: Boolean
     appUser: AppUser
 }
 
-input TodoInput {
+input TaskInput {
     description: String
     done: Boolean
     appUser: AppUserInput
 }
 
-input UpdateTodoInput {
+input UpdateTaskInput {
     id: ID!
     description: String
     done: Boolean
 }
 
+input SaveTaskInput {
+    id: ID
+    description: String
+    done: Boolean
+    userId: ID!
+}
+
 type Query {
     appUsers: [AppUser]
+    tasks(id: ID!): [Task]
 }
 
 type Mutation {
     writeAppUser(input: AppUserInput): AppUser
-    updateTodo(input: UpdateTodoInput): Todo
+    updateTask(input: UpdateTaskInput): Task
+    saveTask(input: SaveTaskInput): Task
 }
 
 schema {

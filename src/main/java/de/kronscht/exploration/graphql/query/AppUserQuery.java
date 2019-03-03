@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Query implements GraphQLQueryResolver {
+public class AppUserQuery implements GraphQLQueryResolver {
 
     private AppUserRepository appUserRepository;
 
     @Autowired
-    public Query(AppUserRepository appUserRepository) {
+    public AppUserQuery(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
     }
 

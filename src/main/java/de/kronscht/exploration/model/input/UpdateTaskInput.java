@@ -1,6 +1,5 @@
 package de.kronscht.exploration.model.input;
 
-import de.kronscht.exploration.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,9 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class TodoInput {
+public class UpdateTaskInput {
 
+    private Long id;
     private String description;
     private boolean done;
-    private AppUserInput appUser;
+
 }

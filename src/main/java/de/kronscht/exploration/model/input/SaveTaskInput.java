@@ -1,20 +1,21 @@
 package de.kronscht.exploration.model.input;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+/**
+ * @author Tobias on 03.03.2019
+ */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class UpdateTodoInput {
+public class SaveTaskInput {
+
 
     private Long id;
     private String description;
     private boolean done;
+    private Long userId;
 
 }

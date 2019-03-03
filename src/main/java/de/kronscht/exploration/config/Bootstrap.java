@@ -1,8 +1,9 @@
 package de.kronscht.exploration.config;
 
 import de.kronscht.exploration.model.AppUser;
-import de.kronscht.exploration.model.Todo;
+import de.kronscht.exploration.model.Task;
 import de.kronscht.exploration.repository.AppUserRepository;
+import de.kronscht.exploration.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,27 +14,29 @@ public class Bootstrap {
 
     private AppUserRepository appUserRepository;
 
+    private TaskRepository taskRepository;
+
     @Autowired
-    public Bootstrap(AppUserRepository appUserRepository) {
+    public Bootstrap(AppUserRepository appUserRepository, TaskRepository taskRepository) {
         this.appUserRepository = appUserRepository;
+        this.taskRepository = taskRepository;
     }
 
     @PostConstruct
     public void initialize() {
 
         AppUser appUser = getAppUser();
-        appUser.addToTodos(getTodo());
+        AppUser savedUser = appUserRepository.save(appUser);
 
-        appUserRepository.save(appUser);
-
+        taskRepository.save(getTodo(savedUser));
     }
 
-    private Todo getTodo() {
-        return new Todo("First", false, null);
+    private Task getTodo(AppUser appUser) {
+        return new Task("First", false, appUser);
     }
 
     private AppUser getAppUser() {
-        return new AppUser("Max", "Mustermann", null);
+        return new AppUser("Max", "Mustermann");
     }
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Todo extends BaseEntity {
+public class Task extends BaseEntity {
 
     private String description;
     private boolean done;

@@ -1,20 +1,20 @@
 package de.kronscht.exploration.model.input;
 
+import de.kronscht.exploration.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class AppUserInput {
+public class TaskInput {
 
-    private String name;
-    private String surname;
+    private String description;
+    private boolean done;
+    private AppUserInput appUser;
 }
