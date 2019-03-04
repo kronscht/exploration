@@ -58,6 +58,19 @@ public class TaskMutation implements GraphQLMutationResolver {
     }
 
     /**
+     * Deletes an existing {@link Task}.
+     * @param id The id for the {@link Task} to delete
+     * @return true
+     */
+    @Transactional
+    public boolean deleteTask(Long id) {
+
+        Task task = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+        taskRepository.delete(task);
+        return true;
+    }
+
+    /**
      * Maps {@link SaveTaskInput} to a {@link Task}.
      *
      * @param input {@link SaveTaskInput}

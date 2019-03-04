@@ -43,6 +43,7 @@ type Mutation {
     writeAppUser(input: AppUserInput): AppUser
     updateTask(input: UpdateTaskInput): Task
     saveTask(input: SaveTaskInput): Task
+    deleteTask(id: ID!): Boolean
 }
 
 schema {
