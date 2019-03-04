@@ -5,6 +5,7 @@ type AppUser {
     surname: String
 }
 
+# Create a new AppUser
 input AppUserInput {
     name: String
     surname: String
@@ -18,18 +19,14 @@ type Task {
     appUser: AppUser
 }
 
-input TaskInput {
-    description: String
-    done: Boolean
-    appUser: AppUserInput
-}
-
+# Updates an existing task
 input UpdateTaskInput {
     id: ID!
     description: String
     done: Boolean
 }
 
+# Save a new Task
 input SaveTaskInput {
     id: ID
     description: String

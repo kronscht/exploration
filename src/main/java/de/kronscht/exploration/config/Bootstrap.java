@@ -32,7 +32,7 @@ public class Bootstrap {
     }
 
     private Task getTodo(AppUser appUser) {
-        return new Task("First", false, appUser);
+        return new Task("Initial Task", false, appUser);
     }
 
     private AppUser getAppUser() {

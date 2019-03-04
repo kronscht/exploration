@@ -16,6 +16,11 @@ public class AppUserQuery implements GraphQLQueryResolver {
         this.appUserRepository = appUserRepository;
     }
 
+    /**
+     * Returns all {@link AppUser}s.
+     *
+     * @return List of {@link AppUser}s
+     */
     public Iterable<AppUser> getAppUsers() {
         return appUserRepository.findAll();
     }
