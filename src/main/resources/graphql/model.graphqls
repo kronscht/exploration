@@ -3,6 +3,7 @@ type AppUser {
     id: ID
     name: String
     surname: String
+    tasks: [Task]
 }
 
 # Create a new AppUser
